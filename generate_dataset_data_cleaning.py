@@ -18,7 +18,7 @@ import openml
 #     task = openml.tasks.get_task(task_id)
 #     datasetID = task.dataset_id
 
-#openai.api_key = "X"
+#openai.api_key = ""
 
 metric_used = tabular_metrics.auc_metric
 cc_test_datasets_multiclass = data.load_all_data()
@@ -53,10 +53,12 @@ caafe_clf = CAAFEClassifier(base_classifier=clf_no_feat_eng,
                             llm_model="gpt-3.5-turbo",
                             iterations=2)
 
+# The iterations happen here:
 caafe_clf.fit_pandas(df_train,
                      target_column_name=target_column_name,
                      dataset_description=dataset_description)
 
+# This process is done only once
 pred = caafe_clf.predict(df_test)
 acc = accuracy_score(pred, test_y)
 print(f'Accuracy after CAAFE {acc}')
