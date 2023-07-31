@@ -130,6 +130,9 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         if disable_caafe:
             self.code = ""
         else:
+            """First, let's include our new module for preprocessing and then we can use their module called 'run_llm_code'
+            With that we can execute the code in the original dataset
+            """
             self.code, prompt, messages = generate_features(
                 ds,
                 df_train,
