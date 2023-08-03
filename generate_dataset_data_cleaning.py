@@ -18,7 +18,7 @@ import openml
 #     task = openml.tasks.get_task(task_id)
 #     datasetID = task.dataset_id
 
-#openai.api_key = ""
+openai.api_key = ""
 
 metric_used = tabular_metrics.auc_metric
 cc_test_datasets_multiclass = data.load_all_data()
@@ -38,9 +38,9 @@ test_x, test_y = data.get_X_y(df_test, target_column_name)
 
 ### Setup Base Classifier
 
-# clf_no_feat_eng = RandomForestClassifier()
-clf_no_feat_eng = TabPFNClassifier(device=('cuda' if torch.cuda.is_available() else 'cpu'), N_ensemble_configurations=4)
-clf_no_feat_eng.fit = partial(clf_no_feat_eng.fit, overwrite_warning=True)
+clf_no_feat_eng = RandomForestClassifier()
+# clf_no_feat_eng = TabPFNClassifier(device=('cuda' if torch.cuda.is_available() else 'cpu'), N_ensemble_configurations=4)
+# clf_no_feat_eng.fit = partial(clf_no_feat_eng.fit, overwrite_warning=True)
 
 clf_no_feat_eng.fit(train_x, train_y)
 pred = clf_no_feat_eng.predict(test_x)

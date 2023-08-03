@@ -8,7 +8,7 @@ from .preprocessing import (
     make_dataset_numeric,
 )
 from .data import get_X_y
-from .caafe import generate_features
+from .caafe import generate_features, generate_features_preprocessing
 from .metrics import auc_metric, accuracy_metric
 import pandas as pd
 import numpy as np
@@ -132,7 +132,41 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         else:
             """First, let's include our new module for preprocessing and then we can use their module called 'run_llm_code'
             With that we can execute the code in the original dataset
+            
+            Notes: we need to update 'ds'. 'df_train' will be update automatically with 'run_llm_code'
             """
+
+            self.code, prompt, messages = generate_features_preprocessing(
+                ds,
+                df_train,
+                model=self.llm_model,
+                iterative=self.iterations,
+                metric_used=auc_metric,
+                iterative_method=self.base_classifier,
+                display_method="markdown",
+                n_splits=self.n_splits,
+                n_repeats=self.n_repeats,
+            )
+
+            df_train = run_llm_code(
+                self.code,
+                df_train,
+            )
+
+            X, y = (
+                df_train.drop(columns=[target_name]).values,
+                df_train[target_name].values,
+            )
+            ds = [
+                "dataset",
+                X,
+                y,
+                [],
+                self.feature_names + [target_name],
+                {},
+                dataset_description,
+            ]
+
             self.code, prompt, messages = generate_features(
                 ds,
                 df_train,
