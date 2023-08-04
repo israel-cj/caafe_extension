@@ -59,7 +59,7 @@ Code formatting for preprocessing step, e.g. replace nan values with mean:
 df.fillna(df.mean())
 ```end
 
-Each codeblock generates one or more cleaning steps, which means you can handle categorical values, missing values reduction dimension, etc., in the same code block.
+Each codeblock generates one or more cleaning steps, which means you can handle categorical values, missing values reduction dimension, etc., in the same code block. The order of such steps may change depending of the dataset.
 Each codeblock ends with ```end and starts with "```python"
 Note: for the feature importance step and other ones, if needed, the column name we want to classify is \"{ds[4][-1]}\", take it into account when generating code.
 Codeblock:
