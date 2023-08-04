@@ -29,7 +29,9 @@ Here are some of the most common procedures and techniques used in data cleaning
 Encoding categorical variable, handling missing values by replacing them with statistical measures like mean, median, or mode, dealing with outliers, 
 removing duplicate records, handling skewed or imbalanced data, standardizing or normalizing features. 
 
-The classifier will be trained on the resulting cleaned dataset and evaluated on a holdout set. The evaluation metric is accuracy. The best-performing code will be selected. All the packages/libraries to perform such preprocessing should be called.
+The classifier will be trained on the resulting cleaned dataset and evaluated on a holdout set. The evaluation metric is accuracy. 
+The best-performing code will be selected. All the packages/libraries to perform such preprocessing should be called. 
+In addition, make sure to always perform a ‘feature importance’ step if the number of features (columns) >= 90, keeping only the 70 most representative.
 
 General code formatting for each added step:
 ```python
@@ -57,7 +59,7 @@ Code formatting for preprocessing step, e.g. replace nan values with mean:
 df.fillna(df.mean())
 ```end
 
-Each codeblock generates exactly one cleaning step
+Each codeblock generates one or more cleaning steps, which means you can handle categorical values, missing values reduction dimension, etc., in the same code block.
 Each codeblock ends with ```end and starts with "```python"
 Codeblock:
 
