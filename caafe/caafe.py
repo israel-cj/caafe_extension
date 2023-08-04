@@ -27,9 +27,9 @@ Number of samples (rows) in training dataset: {int(len(df))}, number of features
 This code generates a cleaner dataset (if necessary) that is useful for a downstream classification algorithm (such as XGBoost) predicting \"{ds[4][-1]}\".
 Here are some of the most common procedures and techniques used in data cleaning for machine learning that can be applied: 
 Encoding categorical variable, handling missing values by replacing them with statistical measures like mean, median, or mode, dealing with outliers, 
-removing duplicate records, handling skewed or imbalanced data, standardizing or normalizing features.
+removing duplicate records, handling skewed or imbalanced data, standardizing or normalizing features. 
 
-The classifier will be trained on the resulting cleaned dataset and evaluated on a holdout set. The evaluation metric is accuracy. The best-performing code will be selected.
+The classifier will be trained on the resulting cleaned dataset and evaluated on a holdout set. The evaluation metric is accuracy. The best-performing code will be selected. All the packages/libraries to perform such preprocessing should be called.
 
 General code formatting for each added step:
 ```python
@@ -41,6 +41,8 @@ Code formatting for a preprocessing step, e.g. Encoding Categorical Variables:
 ```python
 # (Procedure name and description)
 # Explanation why this step is necessary
+from sklearn import preprocessing
+
 for col in df.columns:
     if df[col].dtype == 'object':
         le = LabelEncoder()
