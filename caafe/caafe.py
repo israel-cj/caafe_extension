@@ -61,6 +61,7 @@ df.fillna(df.mean())
 
 Each codeblock generates one or more cleaning steps, which means you can handle categorical values, missing values reduction dimension, etc., in the same code block.
 Each codeblock ends with ```end and starts with "```python"
+Note: for the feature importance step and other ones, if needed, the variable we want to classify is \"{ds[4][-1]}\", take it into account when generating code.
 Codeblock:
 
 """
