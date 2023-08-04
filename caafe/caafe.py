@@ -45,7 +45,7 @@ from sklearn import preprocessing
 
 for col in df.columns:
     if df[col].dtype == 'object':
-        le = LabelEncoder()
+        le = preprocessing.LabelEncoder()
         df[col] = le.fit_transform(df[col])
 ```end
 
