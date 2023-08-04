@@ -18,7 +18,7 @@ import openml
 #     task = openml.tasks.get_task(task_id)
 #     datasetID = task.dataset_id
 
-openai.api_key = ""
+openai.api_key = "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"
 
 metric_used = tabular_metrics.auc_metric
 cc_test_datasets_multiclass = data.load_all_data()

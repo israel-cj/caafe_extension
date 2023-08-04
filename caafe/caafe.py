@@ -6,7 +6,7 @@ from sklearn.model_selection import RepeatedKFold
 from .caafe_evaluate import (
     evaluate_dataset,
 )
-from .run_llm_code import run_llm_code
+from .run_llm_code import run_llm_code, run_llm_code_preprocessing
 
 """
 Here we are going to modify the code for data preprocessing
@@ -156,25 +156,21 @@ def generate_features_preprocessing(
             df_valid_extended = copy.deepcopy(df_valid)
 
             try:
-                df_train = run_llm_code(
+                df_train = run_llm_code_preprocessing(
                     full_code,
                     df_train,
-                    convert_categorical_to_integer=False,
                 )
-                df_valid = run_llm_code(
+                df_valid = run_llm_code_preprocessing(
                     full_code,
                     df_valid,
-                    convert_categorical_to_integer=False,
                 )
-                df_train_extended = run_llm_code(
+                df_train_extended = run_llm_code_preprocessing(
                     full_code + "\n" + code,
                     df_train_extended,
-                    convert_categorical_to_integer=False,
                 )
-                df_valid_extended = run_llm_code(
+                df_valid_extended = run_llm_code_preprocessing(
                     full_code + "\n" + code,
                     df_valid_extended,
-                    convert_categorical_to_integer=False,
                 )
 
             except Exception as e:

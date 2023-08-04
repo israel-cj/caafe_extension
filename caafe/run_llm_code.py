@@ -4,6 +4,33 @@ from .preprocessing import convert_categorical_to_integer_f
 from typing import Any, Dict, Optional
 import pandas as pd
 
+
+def run_llm_code_preprocessing(code: str, df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Executes the given code on the given dataframe and returns the resulting dataframe.
+
+    Parameters:
+    code (str): The code to execute.
+    df (pandas.DataFrame): The dataframe to execute the code on.
+
+    Returns:
+    pandas.DataFrame: The resulting dataframe after executing the code.
+    """
+    try:
+        loc = {}
+        df = copy.deepcopy(df)
+        access_scope = {"df": df, "pd": pd, "np": np}
+        parsed = ast.parse(code)
+        # check_ast(parsed)
+        exec(compile(parsed, filename="<ast>", mode="exec"), access_scope, loc)
+        df = copy.deepcopy(df)
+
+    except Exception as e:
+        print("Code could not be executed", e)
+        raise (e)
+
+    return df
+
 def run_llm_code(code: str, df: pd.DataFrame, convert_categorical_to_integer: Optional[bool] = True, fill_na: Optional[bool] = True) -> pd.DataFrame:
     """
     Executes the given code on the given dataframe and returns the resulting dataframe.
