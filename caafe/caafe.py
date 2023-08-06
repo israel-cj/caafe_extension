@@ -61,7 +61,8 @@ df.fillna(df.mean())
 
 Each codeblock generates one or more cleaning steps, which means you can handle categorical values, missing values reduction dimension, etc., in the same code block. The order of such steps may change depending of the dataset.
 Each codeblock ends with ```end and starts with "```python"
-Note: for the feature importance step and other ones, if needed, the column name we want to classify is \"{ds[4][-1]}\", take it into account when generating code.
+Note: for the feature importance step and other ones, if needed, the column name we want to classify is \"{ds[4][-1]}\", take it into account when generating code. 
+Independently of the process performed, keep the original name of the columns/features.
 Codeblock:
 
 """
@@ -326,6 +327,9 @@ The dataframe `df` is loaded and in memory. Columns are also named attributes.
 Description of the dataset in `df` (column dtypes might be inaccurate):
 "{data_description_unparsed}"
 
+Note: The above description might include feature names that no longer exist in the dataset, as "feature importance" may have been applied to this dataset. 
+Consider only existing features in {list(df.columns)}.
+
 Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
 {samples}
     
@@ -355,6 +359,7 @@ df.drop(columns=['XX'], inplace=True)
 
 Each codeblock generates {how_many} and can drop unused columns (Feature selection).
 Each codeblock ends with ```end and starts with "```python"
+Note: 
 Codeblock:
 """
 
