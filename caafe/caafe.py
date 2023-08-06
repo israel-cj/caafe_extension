@@ -315,7 +315,7 @@ Here is the original code for feature engineering
 
 
 def get_prompt(
-    df, ds, iterative=1, data_description_unparsed=None, samples=None, **kwargs
+        df, ds, iterative=1, data_description_unparsed=None, samples=None, **kwargs
 ):
     how_many = (
         "up to 10 useful columns. Generate as many features as useful for downstream classifier, but as few as necessary to reach good performance."
@@ -327,15 +327,12 @@ The dataframe `df` is loaded and in memory. Columns are also named attributes.
 Description of the dataset in `df` (column dtypes might be inaccurate):
 "{data_description_unparsed}"
 
-Note: The above description might include feature names that no longer exist in the dataset, as "feature importance" may have been applied to this dataset. 
-Consider only existing features in {list(df.columns)}.
-
 Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
 {samples}
-    
+
 This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
 Number of samples (rows) in training dataset: {int(len(df))}
-    
+
 This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting \"{ds[4][-1]}\".
 Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
 The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
@@ -359,7 +356,6 @@ df.drop(columns=['XX'], inplace=True)
 
 Each codeblock generates {how_many} and can drop unused columns (Feature selection).
 Each codeblock ends with ```end and starts with "```python"
-Note: 
 Codeblock:
 """
 
