@@ -31,7 +31,7 @@ removing duplicate records, handling skewed or imbalanced data, standardizing or
 
 The classifier will be trained on the resulting cleaned dataset and evaluated on a holdout set. The evaluation metric is accuracy. 
 The best-performing code will be selected. All the packages/libraries to perform such preprocessing should be called. 
-In addition, make sure to always perform a ‘feature importance’ step if the number of features (columns) >= 90, keeping only the 70 most representative.
+In addition, make sure to always perform a ‘feature importance’ step if the number of features (columns) >= 90, keeping only the 70 most representative. If number of columns <= 90 you can keep all the features.
 
 General code formatting for each added step:
 ```python
@@ -59,7 +59,7 @@ Code formatting for preprocessing step, e.g. replace nan values with mean:
 df.fillna(df.mean())
 ```end
 
-Each codeblock generates one or more cleaning steps, which means you can handle categorical values, missing values reduction dimension, etc., in the same code block. The order of such steps may change depending of the dataset.
+Each codeblock generates exactly one cleaning step.
 Each codeblock ends with ```end and starts with "```python"
 Note: for the feature importance step and other ones, if needed, the column name we want to classify is \"{ds[4][-1]}\", take it into account when generating code. 
 Independently of the process performed, keep the original name of the columns/features.
@@ -150,11 +150,11 @@ def generate_features_preprocessing(
         for (train_idx, valid_idx) in ss.split(df):
             df_train, df_valid = df.iloc[train_idx], df.iloc[valid_idx]
 
-            # Remove target column from df_train # This is because we received the whole dataset for training
-            target_train = df_train[ds[4][-1]]
-            target_valid = df_valid[ds[4][-1]]
-            df_train = df_train.drop(columns=[ds[4][-1]])
-            df_valid = df_valid.drop(columns=[ds[4][-1]])
+            # # Remove target column from df_train # This is because we received the whole dataset for training
+            # target_train = df_train[ds[4][-1]]
+            # target_valid = df_valid[ds[4][-1]]
+            #df_train = df_train.drop(columns=[ds[4][-1]])
+            #df_valid = df_valid.drop(columns=[ds[4][-1]])
 
             df_train_extended = copy.deepcopy(df_train)
             df_valid_extended = copy.deepcopy(df_valid)
@@ -182,11 +182,11 @@ def generate_features_preprocessing(
                 display_method(f"```python\n{format_for_display(code)}\n```\n")
                 return e, None, None, None, None
 
-            # Add target column back to df_train
-            df_train[ds[4][-1]] = target_train
-            df_valid[ds[4][-1]] = target_valid
-            df_train_extended[ds[4][-1]] = target_train
-            df_valid_extended[ds[4][-1]] = target_valid
+            # # Add target column back to df_train
+            # df_train[ds[4][-1]] = target_train
+            # df_valid[ds[4][-1]] = target_valid
+            # df_train_extended[ds[4][-1]] = target_train
+            # df_valid_extended[ds[4][-1]] = target_valid
 
             from contextlib import contextmanager
             import sys, os
