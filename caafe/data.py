@@ -292,7 +292,7 @@ def load_kaggle():
     return cc_test_datasets_multiclass
 
 
-def load_all_data():
+def load_all_data(benchmark_ids):
     cc_test_datasets_multiclass, cc_test_datasets_multiclass_df = load_openml_list(
         benchmark_ids,
         multiclass=True,
@@ -354,18 +354,19 @@ kaggle_dataset_ids = [  # Format: (Dataset ID, Dataset Name, Target Column, User
 ]
 
 # . Replace for the suites of classification and regression without restriction of the size
-benchmark_ids = [
-    11,
-    15,
-    23,
-    31,
-    37,
-    50,
-    188,
-    1068,
-    1169,
-    41027,
-]
+
+# benchmark_ids = [
+#     11,
+#     15,
+#     23,
+#     31,
+#     37,
+#     50,
+#     188,
+#     1068,
+#     1169,
+#     41027,
+# ]
 
 # benchmark_ids = []
 # suite = openml.study.get_suite(271) # Classification

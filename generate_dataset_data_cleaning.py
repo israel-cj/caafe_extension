@@ -11,19 +11,21 @@ from tabpfn.scripts import tabular_metrics
 from functools import partial
 import openml
 
-# suite = openml.study.get_suite(271) # Classification
-# # suite = openml.study.get_suite(269) # Regression
-# tasks = suite.tasks
-# for task_id in tasks:
-#     task = openml.tasks.get_task(task_id)
-#     datasetID = task.dataset_id
+benchmark_ids = []
+suite = openml.study.get_suite(271) # Classification
+# suite = openml.study.get_suite(269) # Regression
+tasks = suite.tasks
+for task_id in tasks:
+    task = openml.tasks.get_task(task_id)
+    datasetID = task.dataset_id
+    benchmark_ids.append(datasetID)
 
 openai.api_key = ""
 
 metric_used = tabular_metrics.auc_metric
-cc_test_datasets_multiclass = data.load_all_data()
+cc_test_datasets_multiclass = data.load_all_data(benchmark_ids[65:67]) # We consider two as an example
 
-ds = cc_test_datasets_multiclass[5]
+ds = cc_test_datasets_multiclass[0] # let's get the first dataset from the largest ones
 ds, df_train, df_test, _, _ = data.get_data_split(ds, seed=0)
 target_column_name = ds[4][-1]
 dataset_description = ds[-1]
