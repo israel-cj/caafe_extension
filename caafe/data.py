@@ -21,7 +21,6 @@ def get_openml_classification(did, multiclass=True, shuffled=True):
     )
     description = refactor_openml_description(dataset.description)
 
-    # Thi is only to consider two classes when it is a regression problem
     if not multiclass:
         X = X[y < 2]
         y = y[y < 2]
@@ -58,10 +57,15 @@ def get_openml_classification(did, multiclass=True, shuffled=True):
     # if max_samples:
     #    X, y = X[:max_samples], y[:max_samples]
 
+    # # I don't know why they included the target value in feature names
+    # if not [list(dataset.features.values())[-1].name][0] in  attribute_names:
+    #    attribute_names = attribute_names + [list(dataset.features.values())[-1].name]
+
     return (
         X,
         y,
         list(np.where(categorical_indicator)[0]),
+        # attribute_names,
         attribute_names + [list(dataset.features.values())[-1].name],
         description,
     )

@@ -98,6 +98,8 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         disable_caafe : bool, optional
             Whether to disable the CAAFE algorithm, by default False.
         """
+        # if y.shape[1]>1:
+        #    y =
         self.dataset_description = dataset_description
         self.feature_names = list(feature_names)
         self.target_name = target_name
