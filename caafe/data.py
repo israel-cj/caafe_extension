@@ -65,7 +65,7 @@ def get_openml_classification(did, multiclass=True, shuffled=True):
         X,
         y,
         list(np.where(categorical_indicator)[0]),
-        # attribute_names,
+        #attribute_names,
         attribute_names + [list(dataset.features.values())[-1].name],
         description,
     )
